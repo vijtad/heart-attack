@@ -9,7 +9,8 @@ model_name= "heart-attack-LR-model"
 version = 1
 model_uri = "models:/{model_name}/{version}".format(model_name=model_name,version=version)
 
-model = mlflow.pyfunc.load_model(model_uri=model_uri)
+#model = mlflow.pyfunc.load_model(model_uri=model_uri)
+model = pickle.load(open('model.pkl', 'rb'))
 
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient
