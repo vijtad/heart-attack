@@ -5,8 +5,8 @@ import numpy as np
 
 
 import mlflow.pyfunc
-
-model = mlflow.pyfunc.load_model(model_uri=f"models:/heart-attack-LR-model/1")
+model_name= "heart-attack-LR-model"
+model = "models:/{model_name}/1".format(model_name=model_name)
 
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient
