@@ -19,7 +19,7 @@ target = ["target"]
 data_capture_client = DataCaptureClient(features, target)
 
 def predict(thal,exang,cp,ca,sex,oldpeak,slope, _id=None):
-    feature_values = [density, volatile_acidity, chlorides, is_red, alcohol]
+    feature_values = [thal,exang,cp,ca,sex,oldpeak,slope]
     prediction = model.predict([feature_values]).tolist()
 
 
