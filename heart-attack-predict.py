@@ -6,9 +6,10 @@ import numpy as np
 
 import mlflow.pyfunc
 model_name= "heart-attack-LR-model"
-model_version = "models:/{model_name}/1".format(model_name=model_name)
+version = 1
+model_uri = "models:/{model_name}/{version}".format(model_name=model_name,version=version)
 
-model = mlflow.pyfunc.load_model(model_uri=model_version)
+model = mlflow.pyfunc.load_model(model_uri=model_uri)
 
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient
@@ -37,3 +38,4 @@ def predict(thal,exang,cp,ca,sex,oldpeak,slope, _id=None):
 
     return dict(prediction=prediction[0])
 
+#result = predict(1,1,1,1,1,1,1)
