@@ -3,6 +3,7 @@ import uuid
 import datetime
 import numpy as np
 
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 import mlflow.pyfunc
 model_name= "heart-attack-LR-model"
