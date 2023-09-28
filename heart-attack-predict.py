@@ -15,22 +15,39 @@ model = pickle.load(open('model.pkl', 'rb'))
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient
 
-features = ['thal','exang','cp','ca','sex','oldpeak','slope']
+features = ['age', 'sex', 'cp', 'trtbps', 'chol', 'fbs', 'restecg', 'thalachh',
+       'exng', 'oldpeak', 'slp', 'caa', 'thall']
 
 target = ["target"]
 
 # pred_client = PredictionClient(features, target)
 data_capture_client = DataCaptureClient(features, target)
 
-def predict(thal,exang,cp,ca,sex,oldpeak,slope, _id=None):
-    feature_values = [thal,exang,cp,ca,sex,oldpeak,slope]
-    prediction = model.predict([feature_values]).tolist()
+def predict(age, sex, cp, trtbps, chol, fbs, restecg, thalachh,
+       exng, oldpeak, slp, caa, thall, _id=None):
+    
+    data = [ {
+        "age" : age, 
+        "sex" : sex, 
+        "cp" : cp, 
+        "trtbps" : trtbps, 
+        "chol" : chol, 
+        "fbs" : fbs, 
+        "restecg" : restecg, 
+        "thalachh" : thalachh,
+        "exng" : exng, 
+        "oldpeak" : oldpeak, 
+        "slp" : slp, 
+        "caa" :caa, 
+        "thall" :thall
+    }]
+    prediction = model.predict(data).tolist()
 
 
     # Record eventID and current time
     if _id is None:
         print("No ID found! Creating a new one.")
-        wine_id = str(datetime.datetime.now())
+        _id = str(datetime.datetime.now())
         # custid = uuid.uuid4()
     print('ID is: {}'.format(_id))
 
