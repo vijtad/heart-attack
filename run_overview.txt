@@ -1,18 +1,16 @@
-Run: RF
+Run: LR
 Classifier type: sklearn.svm.SVC
 Specified classifier params:
-{ 'criterion': 'entropy',
-  'max_depth': 20,
-  'min_samples_leaf': 4,
-  'min_samples_split': 5,
-  'n_estimators': 100}
+{ 'C': 0.1,
+  'penalty': 'l2',
+  'solver': 'liblinear'}
 Classification report:
               precision    recall  f1-score   support
 
-           0       0.86      0.76      0.81        33
-           1       0.83      0.91      0.87        43
+           0       0.87      0.79      0.83        33
+           1       0.85      0.91      0.88        43
 
-    accuracy                           0.84        76
-   macro avg       0.85      0.83      0.84        76
-weighted avg       0.84      0.84      0.84        76
+    accuracy                           0.86        76
+   macro avg       0.86      0.85      0.85        76
+weighted avg       0.86      0.86      0.85        76
 
