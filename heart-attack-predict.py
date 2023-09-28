@@ -41,7 +41,10 @@ def predict(age, sex, cp, trtbps, chol, fbs, restecg, thalachh,
         "caa" :caa, 
         "thall" :thall
     }]
-    prediction = model.predict(data).tolist()
+    df = pd.DataFrame(data)
+    print(df)
+
+    prediction = model.predict(df).tolist()
 
 
     # Record eventID and current time
@@ -51,6 +54,8 @@ def predict(age, sex, cp, trtbps, chol, fbs, restecg, thalachh,
         # custid = uuid.uuid4()
     print('ID is: {}'.format(_id))
 
+    feature_values=[age, sex, cp, trtbps, chol, fbs, restecg, thalachh,
+       exng, oldpeak, slp, caa, thall]
     # pred_client.record(feature_values, prediction, event_id=custid)
     data_capture_client.capturePrediction(feature_values, prediction,event_id=_id)
 
