@@ -9,7 +9,7 @@ import mlflow.pyfunc
 #model_name= "heart-attack-model-v2"
 model_name= "demo-2"
 version = 1
-model_uri = "models:/{model_name}/{version}".format(model_name=model_name)
+model_uri = "models:/{model_name}/{version}".format(model_name=model_name, version = 1)
 
 #model = mlflow.pyfunc.load_model(model_uri=model_uri)
 #model = pickle.load(open('model.pkl', 'rb'))
