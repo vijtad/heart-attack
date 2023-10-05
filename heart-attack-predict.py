@@ -6,12 +6,21 @@ import numpy as np
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 import mlflow.pyfunc
-model_name= "heart-attack-model-v2"
+#model_name= "heart-attack-model-v2"
+model_name= "demo-2"
 version = 1
-model_uri = "models:/{model_name}/{version}".format(model_name=model_name,version=version)
+model_uri = "models:/{model_name}/{version}".format(model_name=model_name)
 
 #model = mlflow.pyfunc.load_model(model_uri=model_uri)
-model = pickle.load(open('model.pkl', 'rb'))
+#model = pickle.load(open('model.pkl', 'rb'))
+
+
+#### Start
+
+
+##### end
+
+model = mlflow.pyfunc.load_model(model_uri=model_uri)
 
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient

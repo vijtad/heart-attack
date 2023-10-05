@@ -3,7 +3,7 @@ Classifier type: sklearn.svm.SVC
 Specified classifier params:
 { 'C': 0.1,
   'penalty': 'l2',
-  'solver': 'liblinear'}
+  'solver': 'lbfgs'}
 Classification report:
               precision    recall  f1-score   support
 
