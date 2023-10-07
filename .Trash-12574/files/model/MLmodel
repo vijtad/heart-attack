@@ -1,0 +1,24 @@
+flavors:
+  python_function:
+    artifacts:
+      heart_attack_model:
+        path: artifacts/heart_attack_model
+        uri: ./heart_attack_model
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.9.16
+mlflow_version: 2.3.2
+model_uuid: 46bc6b8a3e1e48bb86095a3e0917240f
+signature:
+  inputs: '[{"name": "age", "type": "long"}, {"name": "sex", "type": "long"}, {"name":
+    "cp", "type": "long"}, {"name": "trtbps", "type": "long"}, {"name": "chol", "type":
+    "long"}, {"name": "fbs", "type": "long"}, {"name": "restecg", "type": "long"},
+    {"name": "thalachh", "type": "long"}, {"name": "exng", "type": "long"}, {"name":
+    "oldpeak", "type": "double"}, {"name": "slp", "type": "long"}, {"name": "caa",
+    "type": "long"}, {"name": "thall", "type": "long"}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+utc_time_created: '2023-10-06 21:02:09.449824'
