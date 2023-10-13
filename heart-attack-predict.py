@@ -70,6 +70,6 @@ def predict(age, sex, cp, trtbps, chol, fbs, restecg, thalachh,
     # pred_client.record(feature_values, prediction, event_id=custid)
     data_capture_client.capturePrediction(feature_values, prediction,event_id=_id)
 
-    return dict(prediction=prediction[0])
+    return dict(prediction=prediction)
 
 #result = predict(1,1,1,1,1,1,1)
