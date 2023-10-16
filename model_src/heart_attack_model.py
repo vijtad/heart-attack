@@ -1,10 +1,11 @@
 import mlflow
+import pickle
+import datetime
 
 
 # define a custom model
 class heart_attack_model(mlflow.pyfunc.PythonModel):
     def load_context(self, context):
-        import pickle
         with open(context.artifacts["heart_attack_model"], "rb") as f:
             self.model = pickle.load(f)
             # from domino_prediction_logging.prediction_client import PredictionClient
@@ -46,8 +47,10 @@ class heart_attack_model(mlflow.pyfunc.PythonModel):
         #df = pd.DataFrame(data)
         #print(df)
 
-        prediction = self.model.predict(model_input).tolist()
+        predictions = self.model.predict(model_input).tolist()
 
+        print('prediction        : ', type(predictions))
+        print('prediction Values : ', predictions)
 
         # Record eventID and current time
         _id = str(datetime.datetime.now())
@@ -57,9 +60,14 @@ class heart_attack_model(mlflow.pyfunc.PythonModel):
         feature_values=[model_input.age, model_input.sex, model_input.cp, model_input.trtbps, model_input.chol, 
                         model_input.fbs, model_input.restecg, model_input.thalachh,
            model_input.exng, model_input.oldpeak, model_input.slp, model_input.caa, model_input.thall]
+        feature_values = model_input.values.tolist()
+        print('feature_values', feature_values)
         # pred_client.record(feature_values, prediction, event_id=custid)
-        self.data_capture_client.capturePrediction(model_input.values.tolist()[0], prediction,event_id=_id)
+        for i in range(len(feature_values)) :
+            print('feature_values[i] : ', feature_values[i])
+            print('predictions[i] : ', predictions[i])
+            self.data_capture_client.capturePrediction(feature_values[i], [predictions[i]],event_id=_id)
 
-        return dict(prediction=prediction[0])
+        return dict(prediction=predictions)
 
 
