@@ -12,7 +12,7 @@ version = 1
 model_uri = "models:/{model_name}/{version}".format(model_name=model_name, version = 1)
 
 #model = mlflow.pyfunc.load_model(model_uri=model_uri)
-#model = pickle.load(open('model.pkl', 'rb'))
+model = pickle.load(open('./model/model.pkl', 'rb'))
 
 
 #### Start
@@ -20,8 +20,8 @@ model_uri = "models:/{model_name}/{version}".format(model_name=model_name, versi
 
 ##### end
 
-mlflow.set_tracking_uri('https://cdc-sandbox.domino-eval.com')
-model = mlflow.pyfunc.load_model(model_uri=model_uri)
+#mlflow.set_tracking_uri('https://cdc-sandbox.domino-eval.com')
+#model = mlflow.pyfunc.load_model(model_uri=model_uri)
 
 # from domino_prediction_logging.prediction_client import PredictionClient
 from domino_data_capture.data_capture_client import DataCaptureClient
