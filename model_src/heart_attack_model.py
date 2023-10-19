@@ -7,7 +7,7 @@ import datetime
 class heart_attack_model(mlflow.pyfunc.PythonModel):
     def load_context(self, context):
         #with open(context.artifacts["heart_attack_model"], "rb") as f:
-        with open("model/model.pkl", "rb") as f:
+        with open("../model/model.pkl", "rb") as f:
             self.model = pickle.load(f)
             # from domino_prediction_logging.prediction_client import PredictionClient
             from domino_data_capture.data_capture_client import DataCaptureClient
