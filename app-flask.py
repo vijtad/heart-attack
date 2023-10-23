@@ -55,42 +55,40 @@ def my_form_post():
 
     caa = request.form['caa']
     thall = request.form['thall']
-	
-	 data = 
-	  {
-		"age": age,
-		"sex": sex,
-		"cp": cp,
-		"trtbps": trtbps,
-		"chol": chol,
-		"fbs": fbs,
-		"restecg": restecg,
-		"thalachh": thalachh,
-		"exng": exng,
-		"oldpeak": oldpeak,
-		"slp": slp,
-		"caa": caa,
-		"thall": thall
-	  }
+
+    data = 
+      {
+        "age": age,
+        "sex": sex,
+        "cp": cp,
+        "trtbps": trtbps,
+        "chol": chol,
+        "fbs": fbs,
+        "restecg": restecg,
+        "thalachh": thalachh,
+        "exng": exng,
+        "oldpeak": oldpeak,
+        "slp": slp,
+        "caa": caa,
+        "thall": thall
+    }
 
 
-	response = requests.post("https://cdc-sandbox.domino-eval.com:443/models/6536d231f66ed97e65981017/latest/model",
-		auth=(
-			"fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo",
-			"fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo"
-		),
-		json={
-			"data": data
-		}
-	)
-	 
-	print(response.status_code)
-	print(response.headers)
-	print(response.json())
+    response = requests.post("https://cdc-sandbox.domino-eval.com:443/models/6536d231f66ed97e65981017/latest/model",
+    auth=(
+        "fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo",
+        "fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo"
+        ),
+    json={
+        "data": data
+        }
+    )
+ 
+    print(response.status_code)
+    print(response.headers)
+    print(response.json())
 
-	
     return response.json()
-	
 
 
 
