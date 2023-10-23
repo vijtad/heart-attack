@@ -8,6 +8,7 @@ import json
 import flask
 from flask import request, redirect, url_for
 import numpy as np
+import requests
 
 class ReverseProxied(object):
   def __init__(self, app):
@@ -90,21 +91,3 @@ def my_form_post():
     return response.json()
 
 
-
-# Sample redirect using url_for
-@app.route('/redirect_test')
-def redirect_test():
-  return redirect( url_for('another_page') )
-
-# Sample return string instead of using template file
-@app.route('/another_page')
-def another_page():
-  msg = "You made it with redirect( url_for('another_page') )." + \
-        "A call to flask's url_for('index_page') returns " + url_for('index_page') + "."
-  return msg
-
-@app.route("/random")
-@app.route("/random/<int:n>")
-def random(n = 100):
-  random_numbers = list(np.random.random(n))
-  return json.dumps(random_numbers)
