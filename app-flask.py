@@ -56,8 +56,7 @@ def my_form_post():
     caa = request.form['caa']
     thall = request.form['thall']
 
-    data = 
-      {
+    data = {
         "age": age,
         "sex": sex,
         "cp": cp,
