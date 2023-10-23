@@ -38,6 +38,62 @@ app.wsgi_app = ReverseProxied(app.wsgi_app)
 def index_page():
   return flask.render_template("index.html")
 
+@app.route('/', methods=['POST'])
+def my_form_post():
+    age = request.form['age']
+    sex = request.form['sex']
+    cp = request.form['cp']
+    trtbps = request.form['trtbps']
+    chol = request.form['chol']
+    fbs = request.form['fbs']
+    restecg = request.form['restecg']
+    thalachh = request.form['thalachh']
+
+    exng = request.form['exng']
+    oldpeak = request.form['oldpeak']
+    slp = request.form['slp']
+
+    caa = request.form['caa']
+    thall = request.form['thall']
+	
+	 data = 
+	  {
+		"age": age,
+		"sex": sex,
+		"cp": cp,
+		"trtbps": trtbps,
+		"chol": chol,
+		"fbs": fbs,
+		"restecg": restecg,
+		"thalachh": thalachh,
+		"exng": exng,
+		"oldpeak": oldpeak,
+		"slp": slp,
+		"caa": caa,
+		"thall": thall
+	  }
+
+
+	response = requests.post("https://cdc-sandbox.domino-eval.com:443/models/6536d231f66ed97e65981017/latest/model",
+		auth=(
+			"fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo",
+			"fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo"
+		),
+		json={
+			"data": data
+		}
+	)
+	 
+	print(response.status_code)
+	print(response.headers)
+	print(response.json())
+
+	
+    return response.json()
+	
+
+
+
 # Sample redirect using url_for
 @app.route('/redirect_test')
 def redirect_test():
