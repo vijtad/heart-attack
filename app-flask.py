@@ -94,7 +94,7 @@ def my_form_post():
 
     print(response.status_code)
     print(response.headers)
-    print(response.json())
+    logging.info(response.json())
 
     return response.json()
 
