@@ -82,81 +82,16 @@ def my_form_post():
     # change logging setup as required
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)  
 
-    # TO EDIT: update the example request parameters for your model
-    REQUEST_PARAMETERS = data
-    
-    # TO EDIT: copy these values from "Calling your Model" on the Model API overview page
-    DOMINO_URL = "https://cdc-sandbox.domino-eval.com:443"
-    MODEL_ID = "6536d231f66ed97e65981017"
-    MODEL_ACCESS_TOKEN = "vPukaQwUJwv04z8S2VGDspZLtVM8575asNbGORb6VjYU6JLhvEGxZLjp3YGMKORk"
- 
-    # DO NOT EDIT these values
-    MODEL_BASE_URL = f"{DOMINO_URL}/api/modelApis/async/v1/{MODEL_ID}"
-    SUCCEEDED_STATUS = "succeeded"
-    FAILED_STATUS = "failed"
-    QUEUED_STATUS = "queued"
-    TERMINAL_STATUSES = [SUCCEEDED_STATUS, FAILED_STATUS]
-    PENDING_STATUSES = [QUEUED_STATUS]
-    MAX_RETRY_DELAY_SEC = 60
+    DOMINO_URL = 'https://cdc-sandbox.domino-eval.com'
+    MODEL_ID = '6536d231f66ed97e65981017'
+    MODEL_ACCESS_TOKEN = 'CueoJUbSdWoGigkCCQNNfoa89eC8f0xZKuS0LUNyL3ijayyhSIj3HL4Qulvwmbtx'
+    AUTH=(f"{MODEL_ACCESS_TOKEN}", f"{MODEL_ACCESS_TOKEN}")
 
+    response = requests.post(f"{DOMINO_URL}/models/{MODEL_ID}/latest/model",
+       auth=AUTH,
+       json={"data": data}
+    )
 
-    ### CREATE REQUEST ###
-
-    create_response = None
-    retry_delay_sec = 0
-    while (
-        create_response is None
-        or (500 <= create_response.status_code < 600)  # retry for transient 5xx errors
-    ):
-        # status polling with a time interval that backs off up to MAX_RETRY_DELAY_SEC
-        if retry_delay_sec > 0:
-            time.sleep(retry_delay_sec)
-        retry_delay_sec = min(max(retry_delay_sec * 2, 1), MAX_RETRY_DELAY_SEC)
-        
-        create_response = requests.post(
-            MODEL_BASE_URL,
-            headers={"Authorization": f"Bearer {MODEL_ACCESS_TOKEN}"},
-            json={"parameters": REQUEST_PARAMETERS}
-        )
-
-    if create_response.status_code != 200:
-        raise Exception(f"create prediction request failed, response: {create_response}")
-
-    prediction_id = create_response.json()["asyncPredictionId"]
-    logging.info(f"prediction id: {prediction_id}")
-
-
-    ### POLL STATUS AND RETRIEVE RESULT ###
-
-    status_response = None
-    retry_delay_sec = 0
-    while (
-            status_response is None
-            or (500 <= status_response.status_code < 600)  # retry for transient 5xx errors
-            or (status_response.status_code == 200 and status_response.json()["status"] in PENDING_STATUSES)
-    ):
-        # status polling with a time interval that backs off up to MAX_RETRY_DELAY_SEC
-        if retry_delay_sec > 0:
-            time.sleep(retry_delay_sec)
-        retry_delay_sec = min(max(retry_delay_sec * 2, 1), MAX_RETRY_DELAY_SEC)
-
-        status_response = requests.get(
-            f"{MODEL_BASE_URL}/{prediction_id}",
-            headers={"Authorization": f"Bearer {MODEL_ACCESS_TOKEN}"},
-        )
-
-    if status_response.status_code != 200:
-        raise Exception(f"prediction status request failed, response: {create_response}")
-
-    prediction_status = status_response.json()["status"]
-    if prediction_status == SUCCEEDED_STATUS:  # succeeded response includes the prediction result in "result"
-        result = status_response.json()["result"]
-        logging.info(f"prediction succeeded, result:\n{json.dumps(result, indent = 2)}")
-    elif prediction_status == FAILED_STATUS:  # failed response includes the error messages in "errors"
-        errors = status_response.json()["errors"]
-        logging.error(f"prediction failed, errors:\n{json.dumps(errors, indent = 2)}")
-    else:
-        raise Exception(f"unexpected terminal prediction response status: {prediction_status}") 
     print(response.status_code)
     print(response.headers)
     print(response.json())
