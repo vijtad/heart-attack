@@ -63,19 +63,19 @@ def my_form_post():
     thall = request.form['thall']
 
     data = {
-        "age": float(age),
-        "sex": float(sex),
-        "cp": float(cp),
-        "trtbps": float(trtbps),
-        "chol": float(chol),
-        "fbs": float(fbs),
-        "restecg": float(restecg),
-        "thalachh": float(thalachh),
-        "exng": float(exng),
+        "age": number(age),
+        "sex": number(sex),
+        "cp": number(cp),
+        "trtbps": number(trtbps),
+        "chol": number(chol),
+        "fbs": number(fbs),
+        "restecg": number(restecg),
+        "thalachh": number(thalachh),
+        "exng": number(exng),
         "oldpeak": oldpeak,
-        "slp": float(slp),
-        "caa": float(caa),
-        "thall": float(thall)
+        "slp": number(slp),
+        "caa": number(caa),
+        "thall": number(thall)
     }
 
 
