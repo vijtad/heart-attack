@@ -60,7 +60,7 @@ def my_form_post():
     thall = request.form['thall']
 
     data = {
-        "age": float(age),
+        "age": number(age),
         "sex": float(sex),
         "cp": float(cp),
         "trtbps": float(trtbps),
