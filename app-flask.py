@@ -88,7 +88,7 @@ def my_form_post():
     # TO EDIT: copy these values from "Calling your Model" on the Model API overview page
     DOMINO_URL = "https://cdc-sandbox.domino-eval.com:443"
     MODEL_ID = "6536d231f66ed97e65981017"
-    MODEL_ACCESS_TOKEN = "fc0xyHJJhEjWgUUouPSiMOo91Si3dSNQ4HXvnvzEep5WgxjXeajzjU1EzCcililo"
+    MODEL_ACCESS_TOKEN = "vPukaQwUJwv04z8S2VGDspZLtVM8575asNbGORb6VjYU6JLhvEGxZLjp3YGMKORk"
  
     # DO NOT EDIT these values
     MODEL_BASE_URL = f"{DOMINO_URL}/api/modelApis/async/v1/{MODEL_ID}"
