@@ -42,7 +42,9 @@ def index_page():
 @app.route('/', methods=['POST'])
 def my_form_post():
     age = request.form['age']
+    print('age', age, ' : ', typeof(age))
     sex = request.form['sex']
+    print('sex', sex, ' : ', typeof(sex))
     cp = request.form['cp']
     trtbps = request.form['trtbps']
     chol = request.form['chol']
